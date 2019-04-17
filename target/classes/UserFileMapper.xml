@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cxd.mapper.UserFileMapper">
+	<!-- Select 操作  -->
+	<select id="selectFileByOwner" parameterType="String" resultType="UserFile">
+		SELECT * FROM t_file WHERE fileowner=#{owner}
+	</select>
+
+	<select id="selectAllFile" resultType="UserFile">
+		SELECT * FROM t_file
+	</select>
+	
+	<select id="selectPublicFile" resultType="UserFile">
+		SELECT * FROM t_file WHERE filevisibility=true
+	</select>
+	
+	<insert id="insertFile" parameterType="UserFile">
+		INSERT INTO t_file (filename, filesize, filetime, fileowner, filevisibility, fileloc) 
+		VALUES (#{fileName}, #{fileSize}, #{fileTime}, #{fileOwner}, #{fileVisibility}, #{fileLoc});
+	</insert>
+	
+	<update id="changeFileVisibility">
+		UPDATE t_file SET filevisibility = #{1} WHERE fileid = #{0};
+	</update>
+	
+	<delete id="deleteFileByFileId" parameterType="int">
+		DELETE FROM t_file WHERE fileid = #{fileId};
+	</delete>
+	
+	<delete id="deleteFileByFileName" parameterType="String">
+		DELETE FROM t_file WHERE filename = #{filename};
+	</delete>
+	
+	<select id="selectFileByFilename" parameterType="String" resultType="UserFile">
+		SELECT * FROM t_file WHERE filename=#{filename}
+	</select>
+</mapper>
