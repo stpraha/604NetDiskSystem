@@ -20,7 +20,7 @@ public class InsertTest {
 		mapper.insertUser(user);
 		session.commit();
 		
-		List<User> list = mapper.selectUser("aaakasha");
+		List<User> list = mapper.selectAllUser();
 		
 		for(User users : list) {
 			System.out.println(users.getEmail());

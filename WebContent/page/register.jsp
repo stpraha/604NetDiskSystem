@@ -62,10 +62,10 @@ outline: 0;
 			<input type="password" name="confirm_password" style="display:inline-block" placeholder="confirm password"/>
 			<br>
 			<br>
-			<input type="password" name="school_id" style="display:inline-block" placeholder="school id"/>
+			<input type="text" name="school_id" style="display:inline-block" placeholder="school id"/>
 			<br>
 			<br>
-			<input type="password" name="email" style="display:inline-block" placeholder="email(@hust.edu.cn)"/>
+			<input type="text" name="email" style="display:inline-block" placeholder="email(@hust.edu.cn)"/>
 		</div>
 	    <button type="submit" style="display:inline-block" id="btn-register">Sign up</button>
 	</form>

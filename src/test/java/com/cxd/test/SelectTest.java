@@ -3,24 +3,30 @@ package com.cxd.test;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cxd.factory.MySqlSessionFactory;
 import com.cxd.mapper.UserMapper;
 import com.cxd.pojo.User;
 
+
 public class SelectTest {
+	
+	private MySqlSessionFactory mySqlSessionFactory;
+	
 	@Test
 	public void test() {
-		SqlSession session = MySqlSessionFactory.getSqlSession();
+		mySqlSessionFactory = new MySqlSessionFactory();
+		
+		SqlSession session = mySqlSessionFactory.getSqlSession();
 		
 		UserMapper mapper = session.getMapper(UserMapper.class);
 		
+		User u = mapper.selectUser("aaakasha");
 		
-		User user = new User(3, "aaakasha", "cxd456", "M201772456", "1220499599@qq.com");
-		mapper.insertUser(user);
-		session.commit();
+		System.out.println(u.getEmail());
 		
-		List<User> list = mapper.selectUser("aaakasha");
+		List<User> list = mapper.selectAllUser();
 		
 		for(User users : list) {
 			System.out.println(users.getEmail());

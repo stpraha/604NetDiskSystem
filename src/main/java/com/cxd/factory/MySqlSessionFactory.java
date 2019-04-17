@@ -8,30 +8,25 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Service;
 
-@Service("sqlSessionFactory")
+@Service("mySqlSessionFactory")
 public class MySqlSessionFactory {
-	private static SqlSessionFactory sqlSessionFactory = null;
+	private SqlSessionFactory sqlSessionFactory;
 	
-	static {
+	public MySqlSessionFactory() {
 		try {
 			InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			System.out.println("wqerqwerqwerqwe11111111");
 		} catch (Exception e) {
 			e. printStackTrace();
 		}
 	}
 	
-	public static SqlSession getSqlSession() {
+	public SqlSession getSqlSession() {
 		sqlSessionFactory.openSession();
-		System.out.println("wqerqwerqwerqwe");
-		
 		return sqlSessionFactory.openSession();
 	}
 	
-	public static SqlSessionFactory getSqlSessionFactory() {
+	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
-	
-	
 }

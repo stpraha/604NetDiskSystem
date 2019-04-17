@@ -14,5 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (#{username}, #{password}, #{schoolId}, #{email});
 	</insert>
 	
+	<select id="selectAllUser" resultType="User">
+		SELECT * FROM t_user
+	</select>
+	
 
 </mapper>
