@@ -31,14 +31,14 @@ public class FileService{
 		return fileList;
 	}
 	
-	public List<UserFile> selectFileByOwner() {
+	public List<UserFile> selectFileByOwner(String owner) {
 		mySqlSessionFactory = new MySqlSessionFactory();
 		
 		SqlSession session = mySqlSessionFactory.getSqlSession();
 		
 		UserFileMapper mapper = session.getMapper(UserFileMapper.class);
 		
-		List<UserFile> fileList = mapper.selectFileByOwner("aaakasha");
+		List<UserFile> fileList = mapper.selectFileByOwner(owner);
 		
 		return fileList;
 	}
@@ -126,6 +126,18 @@ public class FileService{
 		UserFileMapper mapper = session.getMapper(UserFileMapper.class);
 		
 		UserFile file = mapper.selectFileByFilename(filename);
+		
+		return file;
+	}
+	
+	public UserFile selectByFileId(int fileId) {
+		mySqlSessionFactory = new MySqlSessionFactory();
+		
+		SqlSession session = mySqlSessionFactory.getSqlSession();
+		
+		UserFileMapper mapper = session.getMapper(UserFileMapper.class);
+		
+		UserFile file = mapper.selectFileByFileId(fileId);
 		
 		return file;
 	}

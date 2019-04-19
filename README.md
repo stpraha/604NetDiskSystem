@@ -10,3 +10,10 @@ Still under development
 progress
 --------
 2019-4-16: mybatis is used in this project to deal with mysql.
+
+
+Although ModelAndView is too old, it is used here.<br>
+Model, RedirectAttributes are invalid. I don't know why.<br>
+
+
+what to do next: download file; user keep alive, user login status maintained<br>

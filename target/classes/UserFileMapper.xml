@@ -37,4 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectFileByFilename" parameterType="String" resultType="UserFile">
 		SELECT * FROM t_file WHERE filename=#{filename}
 	</select>
+	
+	<select id="selectFileByFileId" parameterType="int" resultType="UserFile">
+		SELECT * FROM t_file WHERE fileid=#{fileid}
+	</select>
+	
 </mapper>

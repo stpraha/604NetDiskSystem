@@ -22,4 +22,6 @@ public interface UserFileMapper {
 	
 	public UserFile selectFileByFilename(String filename);
 	
+	public UserFile selectFileByFileId(int fileid);
+	
 }

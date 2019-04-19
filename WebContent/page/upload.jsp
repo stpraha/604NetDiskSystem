@@ -62,13 +62,13 @@ button:hover {
 <form id= "uploadForm">
  
   <input type="file" id="file" name="myfile" />
-  <input type="button" onclick="UpladFile()" value="上传" />
+  <input type="button" onclick="UploadFile()" value="上传" />
  
 </form>
 
 <script type="text/javascript">
  
-    function UpladFile() {
+    function UploadFile() {
       var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
       var FileController = "/NetDisk/upload.do";          // 接收上传文件的后台地址 
       var progressBar = document.getElementById("progressBar");

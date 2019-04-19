@@ -13,8 +13,13 @@ import com.cxd.pojo.*;
 import com.cxd.service.FileService;
 import com.cxd.service.UserService;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,4 +66,56 @@ public class FileController {
 		fileService.addFile(userFile);
 		
 	}
+	
+	
+	@RequestMapping("download.do")
+	public String downloadFile(HttpServletResponse response, HttpSession httpSession, HttpServletRequest request,  
+			@RequestParam(value="name") String name, 
+			@RequestParam(value="originalName") String originalName, 
+			@RequestParam(value="path") String path) {
+		JSONObject result = new JSONObject();
+		User user = new User();
+		user.setName(name);
+		File file = new File();
+		file.setOriginalName(originalName);
+		file.setPath(path);
+		try {
+			String local = request.getSession().getServletContext().getRealPath("/downloadFile/");
+			String myFile = local + originalName;
+			if(!new java.io.File(myFile).exists()){
+				java.io.File realPath = new java.io.File(local);
+				if(!realPath.exists()) {
+					realPath.mkdirs();
+				}
+				if(fileService.downloadFile(user, file, myFile)) {
+					result.put("errres", true);
+					result.put("errmsg", "下载成功！");
+					result.put("url", "downloadFile\\" + originalName);
+				}else {
+					result.put("errres", false);
+					result.put("errmsg", "文件不存在！");
+				}
+			}else {
+				result.put("errres", true);
+				result.put("errmsg", "文件已经存在！");
+				result.put("url", "downloadFile\\" + originalName);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ResponseUtil.write(response, result);
+		return null;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
