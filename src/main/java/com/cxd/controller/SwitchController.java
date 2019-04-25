@@ -2,6 +2,7 @@ package com.cxd.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,11 +26,14 @@ import com.cxd.service.UserService;
 @Controller
 public class SwitchController {
 	
+	@Resource
+	FileService fileService;
+	
 	@RequestMapping(value = "toMain.do")
     public ModelAndView toMain(HttpServletRequest request) throws Exception {
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		FileService fileService = (FileService)context.getBean("fileService");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//FileService fileService = (FileService)context.getBean("fileService");
 		
 		List<UserFile> publicFileList = fileService.selectAllFile();
 		List<UserFile> privateFileList = fileService.selectFileByOwner("stpraha");
@@ -54,8 +58,8 @@ public class SwitchController {
 		String id = request.getParameter("id");
 		System.out.println("qwer23412   " + id );
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		FileService fileService = (FileService)context.getBean("fileService");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		//FileService fileService = (FileService)context.getBean("fileService");
 		
 		UserFile userFile = fileService.selectByFileId(Integer.valueOf(id));
 		

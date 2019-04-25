@@ -14,5 +14,6 @@
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd ">
     <context:annotation-config/>
     <context:component-scan base-package="com.cxd.*"/>
+    <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
 </beans>

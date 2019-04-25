@@ -10,9 +10,11 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
            
     <!-- 启用spring mvc注解 -->
-    <context:annotation-config></context:annotation-config>
+    <context:annotation-config/>
     <!--  扫描包 -->
-    <context:component-scan base-package="com.cxd.*"></context:component-scan>
+    <context:component-scan base-package="com.cxd.*"/>
+    
+
     
     <mvc:annotation-driven/>
     
@@ -25,4 +27,6 @@
 	     <property name="maxInMemorySize" value="4096" />
 	     <property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
+
+
 </beans>

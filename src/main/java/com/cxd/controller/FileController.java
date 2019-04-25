@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cxd.pojo.*;
 import com.cxd.service.FileService;
@@ -73,12 +74,7 @@ public class FileController {
 			@RequestParam(value="name") String name, 
 			@RequestParam(value="originalName") String originalName, 
 			@RequestParam(value="path") String path) {
-		JSONObject result = new JSONObject();
-		User user = new User();
-		user.setName(name);
-		File file = new File();
-		file.setOriginalName(originalName);
-		file.setPath(path);
+		
 		try {
 			String local = request.getSession().getServletContext().getRealPath("/downloadFile/");
 			String myFile = local + originalName;
