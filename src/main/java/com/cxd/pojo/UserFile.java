@@ -8,12 +8,21 @@ public class UserFile {
 	private String fileOwner;
 	private boolean fileVisibility;
 	private String fileLoc;
+	private String fileStoreName;
+
+	public String getFileStoreName() {
+		return fileStoreName;
+	}
+
+	public void setFileStoreName(String fileStoreName) {
+		this.fileStoreName = fileStoreName;
+	}
 
 	UserFile() {
 		
 	}
 	
-	public UserFile(int fileId, String fileName, int fileSize, String fileTime, String fileOwner, boolean fileVisibility, String fileLoc) {
+	public UserFile(int fileId, String fileName, int fileSize, String fileTime, String fileOwner, boolean fileVisibility, String fileLoc, String fileStoreName) {
 		super();
 		this.fileId = fileId;
 		this.fileName = fileName;
@@ -22,6 +31,7 @@ public class UserFile {
 		this.fileOwner = fileOwner;
 		this.fileVisibility = fileVisibility;
 		this.fileLoc= fileLoc;
+		this.fileStoreName = fileStoreName;
 		
 	}
 	

@@ -49,7 +49,7 @@ public class UserController {
         else {
         	session.setAttribute("CURRENT_USER", user.getUsername());
         	System.out.println(" 登录成功" + username);
-            return "redirect:/page/mainPage.jsp";
+            return "redirect:toMain.do";
         }
     }
     
@@ -67,7 +67,7 @@ public class UserController {
         	System.out.println(username + "  logout");
         	session.removeAttribute("CURRENT_USER");
         	System.out.println(session.getAttribute("test  " + "CURRENT_USER"));
-            return "redirect:/page/login.jsp";
+            return "redirect:toMain.do";
         }
     }
     

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
-		
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
-  <title>604 Net Disk System</title>
-  <meta charset="utf-8">
+<meta charset="UTF-8">
+<title>文件管理</title>
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
   <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -13,9 +14,8 @@
 </head>
 
 <style type="text/css">
-
-.tb{
-	wihth:50%;
+.cont{
+	text-align: left;
 }
 
 body{
@@ -52,68 +52,57 @@ outline: 0;
 
 <body>
 
+	<%
+		String currentUser = (String) session.getAttribute("CURRENT_USER");
+		if(currentUser == null || currentUser.equals("")) {
+	%>
+		
+        <script type="text/javascript" language="javascript">      
+        	alert("您还没有登录，请登录..."); 
+        	top.location.href="/NetDisk/page/login.jsp";
+        </script>
+	<%
+		}
+	%>
+
 	<div class="jumbotron">
 		<h1><a href="/NetDisk/toMain.do">604 Net Disk System</a></h1>
-		<h2>文件详情</h2>
+		<h2>文件管理</h2>
 	</div>
-	
-<div class="container"  >
-	
-<table class="table table-condensed">
-  <caption>文件信息</caption>
+
+	<div class="cont">
+		<div>${param.fileList}</div>
+		<c:forEach var="userfile" items="${userFile}" >
+			<table class="table table-bordered">
+  <caption><a href="toFile.do?id=${userfile.fileId}">${userfile.fileName}</a></caption>
   <tbody>
     <tr>
-      <td>文件名称</td>
+      <td>文件名</td>
       <td>文件大小</td>
+      <td>上传日期</td>
       <td>上传者</td>
-      <td>公开性</td>
-      <td>上传时间</td>
+      <td>是否公开</td>
     </tr>
     <tr>
-      <td>${userFile.fileName}</td>
-      <td>${userFile.fileSize}</td>
-      <td>${userFile.fileOwner}</td>
-      <td>${userFile.fileVisibility}</td>
-      <td>${userFile.fileTime}</td>
-      </tr>
+      <td>${userfile.fileName}</td>
+      <td>${userfile.fileSize}</td>
+      <td>${userfile.fileTime}</td>
+      <td>${userfile.fileOwner}</td>
+      <td>${userfile.fileVisibility}</td>
+    </tr>
+    <tr>
+      <td><a href="delete.do?id=${userfile.fileId}">删除</a></td>
+      <td>修改</td>
+      <td>修改</td>
+      <td>修改</td>
+      <td>切换</td>
+    </tr>
   </tbody>
 </table>
-	
-	<input type="button" onclick="DownloadFile()" value="下载" />
-</div>
-
-<script type="text/javascript">
- 
-    function DownloadFile() {
-    	var form = new FormData();
-    	form.append("fileName", "${userFile.fileName}");
-    	form.append("filePath", "${userFile.fileLoc}");
-    	var xhr = new XMLHttpRequest();
-    	xhr.open("post", "/NetDisk/download.do", true);
-    	xhr.onreadystatechange = function() {
-    	    if(xhr.readyState == 4) {
-    	        //成功
-    	    }
-    	}
-    	//执行请求
-    	xhr.send(form)
-    }
-
-  </script>
-  
+		</c:forEach>									
+	</div>
+	<div>test</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 

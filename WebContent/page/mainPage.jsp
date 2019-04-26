@@ -49,7 +49,7 @@ outline: 0;
 <body>
 
 	<div class="jumbotron">
-		<h1>604 Net Disk System</h1>
+		<h1><a href="/NetDisk/toMain.do">604 Net Disk System</a></h1>
 		<h2>文件列表</h2>
 	</div>
 
@@ -59,7 +59,7 @@ outline: 0;
     <li class="active"><a data-toggle="tab" href="#home">公共文件</a></li>
     <li><a data-toggle="tab" href="#menu1">我的文件</a></li>
     <li><a data-toggle="tab" href="#menu2">说明页</a></li>
-    <li><a data-toggle="tab" href="#menu3">预留页</a></li>
+    <li><a data-toggle="tab" href="#menu3">个人中心</a></li>
   </ul>
 
   <div class="tab-content">
@@ -84,11 +84,18 @@ outline: 0;
       <p>这是菜单 2 显示的内容。这是菜单 2 显示的内容。这是菜单 2 显示的内容。</p>
     </div>
     <div id="menu3" class="tab-pane fade">
-      <h3>菜单 3</h3>
-      <p>这是菜单 3 显示的内容。这是菜单 3 显示的内容。这是菜单 3 显示的内容。</p>
+      <div><h3>当前用户：${sessionScope.CURRENT_USER }</h3></div>
+      <button id="btn-login" onclick="javascrtpt:window.location.href='/NetDisk/page/login.jsp'">登录</button>
+      <br>
+      <a href="/NetDisk/logout.do"><button id="btn-logout">注销</button></a>
+      <br>
+      <a href="/NetDisk/toManage.do"><button id="btn-manage">文件管理</button></a>
+      <br>
+      <a href="/NetDisk/toUpload.do"><button >文件上传</button></a>
     </div>
   </div>
 </div>
+
 
 
 </body>

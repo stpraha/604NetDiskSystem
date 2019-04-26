@@ -46,7 +46,7 @@ outline: 0;
 <body>
 <div class="container">
 	<div class="jumbotron">
-		<h1>604 Net Disk System</h1>
+		<h1><a href="/NetDisk/toMain.do">604 Net Disk System</a></h1>
 	</div>
 <form action="/NetDisk/login.do" method="post">
 		<div>
@@ -62,3 +62,4 @@ outline: 0;
 </div>
 </body>
 </html>
+

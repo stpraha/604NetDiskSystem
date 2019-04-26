@@ -18,8 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertFile" parameterType="UserFile">
-		INSERT INTO t_file (filename, filesize, filetime, fileowner, filevisibility, fileloc) 
-		VALUES (#{fileName}, #{fileSize}, #{fileTime}, #{fileOwner}, #{fileVisibility}, #{fileLoc});
+		INSERT INTO t_file (filename, filesize, filetime, fileowner, filevisibility, fileloc, filestorename) 
+		VALUES (#{fileName}, #{fileSize}, #{fileTime}, #{fileOwner}, #{fileVisibility}, #{fileLoc}, #{fileStoreName});
 	</insert>
 	
 	<update id="changeFileVisibility">
@@ -35,11 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="selectFileByFilename" parameterType="String" resultType="UserFile">
-		SELECT * FROM t_file WHERE filename=#{filename}
+		SELECT * FROM t_file WHERE filename = #{filename}
 	</select>
 	
 	<select id="selectFileByFileId" parameterType="int" resultType="UserFile">
-		SELECT * FROM t_file WHERE fileid=#{fileid}
+		SELECT * FROM t_file WHERE fileid = #{fileid}
+	</select>
+	
+	<select id="selectFileByFileStoreName" parameterType="String" resultType="UserFile">
+		SELECT * FROM t_file WHERE filestorename = #{fileStoreName}
 	</select>
 	
 </mapper>

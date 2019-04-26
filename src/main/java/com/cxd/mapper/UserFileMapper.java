@@ -24,4 +24,5 @@ public interface UserFileMapper {
 	
 	public UserFile selectFileByFileId(int fileid);
 	
+	public UserFile selectFileByFileStoreName(String fileStoreName);
 }
