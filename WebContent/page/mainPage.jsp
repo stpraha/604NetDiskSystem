@@ -80,8 +80,13 @@ outline: 0;
 		</div>>
     </div>
     <div id="menu2" class="tab-pane fade">
-      <h3>菜单 2</h3>
-      <p>这是菜单 2 显示的内容。这是菜单 2 显示的内容。这是菜单 2 显示的内容。</p>
+      <h2>604网盘系统</h2>
+      <p>公共文件页面显示的是共享文件，全部人可见</p>
+      <p>我的文件页面显示的是私人文件，只有所有者可见</p>
+      <p>在个人中心里可以进行登录、注销、文件管理、上传文件</p>
+      <p>在个人中心中同时也可以使用管理员功能</p>
+      <p>如有BUG请及时联系管理员！</p>
+
     </div>
     <div id="menu3" class="tab-pane fade">
       <div><h3>当前用户：${sessionScope.CURRENT_USER }</h3></div>

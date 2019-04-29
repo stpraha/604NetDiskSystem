@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//WebContent/page/register.jsp=UTF-8
+encoding//WebContent/page/test.html=UTF-8
 encoding//WebContent/page/upload.jsp=UTF-8
 encoding//src/main/java/com/cxd/controller/FileController.java=UTF-8
 encoding//src/main/java/com/cxd/service/FileService.java=UTF-8
+encoding//src/main/java/com/cxd/service/UserService.java=UTF-8

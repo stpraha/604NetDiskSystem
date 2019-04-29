@@ -72,9 +72,9 @@ outline: 0;
 
 	<div class="cont">
 		<div>${param.fileList}</div>
-		<c:forEach var="userfile" items="${userFile}" >
+		<c:forEach var="userFile" items="${userFile}" >
 			<table class="table table-bordered">
-  <caption><a href="toFile.do?id=${userfile.fileId}">${userfile.fileName}</a></caption>
+  <caption><a href="toFile.do?id=${userFile.fileId}">${userFile.fileName}</a></caption>
   <tbody>
     <tr>
       <td>文件名</td>
@@ -84,18 +84,18 @@ outline: 0;
       <td>是否公开</td>
     </tr>
     <tr>
-      <td>${userfile.fileName}</td>
-      <td>${userfile.fileSize}</td>
-      <td>${userfile.fileTime}</td>
-      <td>${userfile.fileOwner}</td>
-      <td>${userfile.fileVisibility}</td>
+      <td>${userFile.fileName}</td>
+      <td>${userFile.fileSize}</td>
+      <td>${userFile.fileTime}</td>
+      <td>${userFile.fileOwner}</td>
+      <td>${userFile.fileVisibility}</td>
     </tr>
     <tr>
-      <td><a href="delete.do?id=${userfile.fileId}">删除</a></td>
+      <td><a href="delete.do?id=${userFile.fileId}">删除</a></td>
       <td>修改</td>
       <td>修改</td>
       <td>修改</td>
-      <td>切换</td>
+      <td><a href="switchVisibility.do?id=${userFile.fileId}&visibility=${userFile.fileVisibility}">切换</a></td>
     </tr>
   </tbody>
 </table>

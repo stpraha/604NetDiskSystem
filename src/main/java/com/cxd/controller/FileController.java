@@ -1,15 +1,21 @@
 package com.cxd.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -45,6 +51,9 @@ public class FileController {
 	
 	@Resource
 	HttpServletRequest request;
+	
+	@Resource
+	HttpServletResponse response;
 	
 	@Resource
 	UserService userService;
@@ -102,40 +111,64 @@ public class FileController {
 		
 	}
 	
+	@RequestMapping("download.do")
+	public String downloadFile() throws Exception {
+		String idStr = request.getParameter("id");
+
+		int id = Integer.valueOf(idStr);
+		String username = (String) session.getAttribute("CURRENT_USER");
+		
+		System.out.println(username + " download file " + idStr);
+		
+		UserFile downloadFile = fileService.selectByFileId(id);
+		
+		if(username == null || username.equals("")) {
+			return "/page/login.jsp";
+		}
+		else if(downloadFile == null) {
+			System.out.println("file not found");
+			return "redirect:toMain.do";
+		}
+		else if(!downloadFile.isFileVisibility() && !downloadFile.getFileOwner().equals(username)) {
+			System.out.println(downloadFile.isFileVisibility());
+			//System.out.println();
+			return "redirect:toMain.do";
+		}
+		else {
+			return "redirect:downloadFile.do?id=" + id;
+		}
+
+	}
 	
-//	@RequestMapping("download.do")
-//	public String downloadFile(HttpServletResponse response, HttpSession httpSession, HttpServletRequest request,  
-//			@RequestParam(value="name") String name, 
-//			@RequestParam(value="originalName") String originalName, 
-//			@RequestParam(value="path") String path) {
-//		
-//		try {
-//			String local = request.getSession().getServletContext().getRealPath("/downloadFile/");
-//			String myFile = local + originalName;
-//			if(!new java.io.File(myFile).exists()){
-//				java.io.File realPath = new java.io.File(local);
-//				if(!realPath.exists()) {
-//					realPath.mkdirs();
-//				}
-//				if(fileService.downloadFile(user, file, myFile)) {
-//					result.put("errres", true);
-//					result.put("errmsg", "涓嬭浇鎴愬姛锛�");
-//					result.put("url", "downloadFile\\" + originalName);
-//				}else {
-//					result.put("errres", false);
-//					result.put("errmsg", "鏂囦欢涓嶅瓨鍦紒");
-//				}
-//			}else {
-//				result.put("errres", true);
-//				result.put("errmsg", "鏂囦欢宸茬粡瀛樺湪锛�");
-//				result.put("url", "downloadFile\\" + originalName);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		ResponseUtil.write(response, result);
-//		return null;
-//	}	
+	@RequestMapping("downloadFile.do")
+	public ResponseEntity download( ) throws Exception {
+		String idStr = request.getParameter("id");
+		int id = Integer.valueOf(idStr);
+		String username = (String) session.getAttribute("CURRENT_USER");
+		System.out.println(username + " download file " + idStr);
+		UserFile downloadFile = fileService.selectByFileId(id);
+		String filePath = downloadFile.getFileLoc();
+		String fileName = downloadFile.getFileName();
+		
+		
+		//下面的用来下载文件
+
+		ServletContext servletContext = request.getServletContext();
+		File file = new File(filePath);
+		InputStream inputStream = new FileInputStream(file);
+		byte[] body = new byte[inputStream.available()];
+		inputStream.read(body);
+		
+		fileName = new String(fileName.getBytes("gbk"),"iso8859-1");
+		
+		HttpHeaders headers=new HttpHeaders();
+		headers.add("Content-Disposition", "attachment;filename="+fileName);
+		
+		HttpStatus statusCode=HttpStatus.OK;
+		 
+        ResponseEntity<byte[]> response=new ResponseEntity<byte[]>(body,headers,statusCode);
+        return response;
+	}
 	
 	@RequestMapping("delete.do")
 	public String deleteFile() throws Exception {
@@ -152,16 +185,24 @@ public class FileController {
 			return "redirect:/page/login.jsp";
 		}
 	}
+	
+	@RequestMapping("switchVisibility.do")
+	public String switchVisibility() throws Exception {
+		String idStr = request.getParameter("id");
+		
+		String visibility = request.getParameter("visibility");
+		
+		int id = Integer.valueOf(idStr);
+		
+		UserFile file = fileService.selectByFileId(id);
+		
+		if(visibility.equals("true")) {
+			fileService.changeFileVisibilityFalse(id);
+		}
+		else if(visibility.equals("false")) {
+			fileService.changeFileVisibilityTrue(id);
+		}
+		return "redirect:toManage.do";
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
 

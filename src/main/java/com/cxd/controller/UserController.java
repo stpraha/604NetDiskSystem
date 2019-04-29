@@ -41,14 +41,13 @@ public class UserController {
 		String password = request.getParameter("password");
 		
 		User user = userService.verifyUser(username, password);
-    	
+		
         if(user == null || !user.getUsername().equals(username)) {
-        	System.out.println("login failed");
-        	return "register";
+	    	String message = "?message=loginfailed";
+			return "redirect:/page/login.jsp" + message;
         }
         else {
         	session.setAttribute("CURRENT_USER", user.getUsername());
-        	System.out.println(" 登录成功" + username);
             return "redirect:toMain.do";
         }
     }
@@ -76,14 +75,27 @@ public class UserController {
 		//ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		//UserService userService = (UserService)context.getBean("userService");
 		
-		boolean canRegister = RegisterUtil.checkNull(username, password, confirm_password, school_id, email) & 
-							  userService.checkUser(username);
-		if(canRegister) {
-			User user = new User(1, username, password, school_id, email);
+		boolean canRegister = RegisterUtil.checkNull(username, password, confirm_password, school_id, email);
+		
+		boolean usernameCheck = userService.checkUser(username);
+		
+		boolean admin = false;
+		
+		if(canRegister && usernameCheck) {
+			User user = new User(1, username, password, school_id, email, admin);
 	    	System.out.println("点了注册" + username + password + confirm_password + school_id + email);
 	    	userService.addUser(user);
-	    	return "loginSuccess";
+	    	return "redirect:login.do";
 		}
-		else return "register";
+		else {
+	    	String message = "?message=registerfailed";
+			if(!userService.checkUser(username)) {
+				message = message + "&errorMessage=idUsed";
+			}
+			else if(!canRegister) {
+				message = message + "&errorMessage=inputError";
+			}
+			return "redirect:/page/register.jsp" + message;
+		}
     }
 }

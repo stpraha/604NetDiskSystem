@@ -44,9 +44,9 @@ progress
 
 2019-4-25: use session to keep user-status.<br>
 
-2019-4-26: user login status can be kept. fixed some bugs. Add user <strong>user verification</strong> in <strong>pages</strong> and <strong>controllers</strong>.
+2019-4-26: user login status can be kept. fixed some bugs. Add user <strong>user verification</strong> in <strong>pages</strong> and <strong>controllers</strong>.<br>
 
-
+2019-4-29: add simple download function.(not bug free)<br>
 
 Although ModelAndView is too old, it is used here.<br>
 Model, RedirectAttributes are invalid. I don't know why.<br>

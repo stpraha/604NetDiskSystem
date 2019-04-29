@@ -6,18 +6,20 @@ public class User {
 	private String password;
 	private String schoolId;
 	private String email;
+	private boolean admin;
 	
 	User() {
 		
 	}
-	
-	public User(int userid, String username, String password, String schoolId, String email) {
+
+	public User(int userid, String username, String password, String schoolId, String email, boolean admin) {
 		super();
 		this.userid = userid;
 		this.username = username;
 		this.password = password;
 		this.schoolId = schoolId;
 		this.email = email;
+		this.admin = admin;
 	}
 	
 	public int getUserid() {
@@ -50,5 +52,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 }

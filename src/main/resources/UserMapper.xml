@@ -10,13 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO t_user (username, password, schoolid, email) 
-		VALUES (#{username}, #{password}, #{schoolId}, #{email});
+		INSERT INTO t_user (username, password, schoolid, email, admin) 
+		VALUES (#{username}, #{password}, #{schoolId}, #{email}, #{admin});
 	</insert>
 	
 	<select id="selectAllUser" resultType="User">
 		SELECT * FROM t_user
 	</select>
-	
 
 </mapper>

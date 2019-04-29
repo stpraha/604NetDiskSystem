@@ -51,6 +51,19 @@ outline: 0;
 </style>
 
 <body>
+	<%
+		String currentUser = (String) session.getAttribute("CURRENT_USER");
+		if(currentUser == null || currentUser.equals("")) {
+	%>
+		
+        <script type="text/javascript" language="javascript">      
+        	alert("您还没有登录，请登录..."); 
+        	top.location.href="/NetDisk/page/login.jsp";
+        </script>
+	<%
+		}
+	%>
+
 
 	<div class="jumbotron">
 		<h1><a href="/NetDisk/toMain.do">604 Net Disk System</a></h1>
@@ -78,25 +91,20 @@ outline: 0;
       </tr>
   </tbody>
 </table>
-	
-	<input type="button" onclick="DownloadFile()" value="下载" />
+
+
+<div>${userFile.fileTime}</div>
+<div>asdfasdf</div>
+
+<div><a href="download.do?id=${userFile.fileId}">
+	<button>下载</button>
+	</a></div>
 </div>
 
 <script type="text/javascript">
  
     function DownloadFile() {
-    	var form = new FormData();
-    	form.append("fileName", "${userFile.fileName}");
-    	form.append("filePath", "${userFile.fileLoc}");
-    	var xhr = new XMLHttpRequest();
-    	xhr.open("post", "/NetDisk/download.do", true);
-    	xhr.onreadystatechange = function() {
-    	    if(xhr.readyState == 4) {
-    	        //成功
-    	    }
-    	}
-    	//执行请求
-    	xhr.send(form)
+    	
     }
 
   </script>
