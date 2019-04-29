@@ -19,7 +19,7 @@ public class FileUtil {
 	
 	public static String getFileStoreName(String filename, int fileSize, String fileOwner) {
 		
-		String fileStoreName = fileOwner + filename + fileSize;
+		String fileStoreName = fileOwner + fileSize + filename;
 		
 		return fileStoreName;
 		

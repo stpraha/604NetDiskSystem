@@ -83,11 +83,19 @@ public class SwitchController {
 		
 		//这里用addAttribute就报错了。报了个400
 		mnv.addObject("userFile", userFile);
-		//mnv.addAttribute("publicFileList", publicFileList);
-		//model.addAttribute("hello", "qwerqrtryt345");
+
+		if(userFile.getFileName().endsWith(".png") || userFile.getFileName().endsWith(".jpg")) {
+			System.out.println(userFile.getFileLoc());
+			mnv.addObject("imgpath", userFile.getFileLoc());
+		}
 		
-		//ModelAndView mv = new ModelAndView(redirect:)
+		
 		mnv.setViewName("filePage");
+		
+		
+		
+		
+		
 		
 		return mnv;
 	}

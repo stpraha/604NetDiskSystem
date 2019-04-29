@@ -93,21 +93,12 @@ outline: 0;
 </table>
 
 
-<div>${userFile.fileTime}</div>
-<div>asdfasdf</div>
-
 <div><a href="download.do?id=${userFile.fileId}">
 	<button>下载</button>
 	</a></div>
 </div>
 
-<script type="text/javascript">
- 
-    function DownloadFile() {
-    	
-    }
-
-  </script>
+<img src="${imgpath}" id="showPic" name="showPic" width="500"></img>
   
 </body>
 </html>
