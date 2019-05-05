@@ -165,13 +165,19 @@ public class FileService{
 	}
 	
 	public UserFile selectByFileId(int fileId) {
+		
+		System.out.println("hrer");
 		//mySqlSessionFactory = new MySqlSessionFactory();
 		
 		SqlSession session = mySqlSessionFactory.getSqlSession();
 		
 		UserFileMapper mapper = session.getMapper(UserFileMapper.class);
 		
+		
+		
 		UserFile file = mapper.selectFileByFileId(fileId);
+		
+		
 		
 		return file;
 	}

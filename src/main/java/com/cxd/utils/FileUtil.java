@@ -1,6 +1,7 @@
 package com.cxd.utils;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,9 +18,19 @@ public class FileUtil {
 		}
 	}
 	
-	public static String getFileStoreName(String filename, int fileSize, String fileOwner) {
+	public static String getFileStoreName(String fileName, int fileSize, String fileOwner) throws UnsupportedEncodingException {
 		
-		String fileStoreName = fileOwner + fileSize + filename;
+		String fileNameEncode = "";
+		byte[] bytes = fileName.getBytes("UTF-8");
+		
+		
+		for(byte b: bytes) {
+			fileNameEncode = fileNameEncode + String.format("%02X", b);
+		}
+
+		//String fileNameEncode = new String(fileName.getBytes("utf-8"), "GBK");
+		
+		String fileStoreName = fileOwner + fileSize + fileNameEncode;
 		
 		return fileStoreName;
 		

@@ -98,8 +98,13 @@ outline: 0;
 	</a></div>
 </div>
 
+<br>
+<br>
 <img src="${imgpath}" id="showPic" name="showPic" width="500"></img>
-  
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>
 

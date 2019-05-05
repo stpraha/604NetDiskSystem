@@ -23,6 +23,7 @@ import com.cxd.pojo.User;
 import com.cxd.pojo.UserFile;
 import com.cxd.service.FileService;
 import com.cxd.service.UserService;
+import com.cxd.utils.PictureUtil;
 
 
 @Controller
@@ -85,17 +86,17 @@ public class SwitchController {
 		mnv.addObject("userFile", userFile);
 
 		if(userFile.getFileName().endsWith(".png") || userFile.getFileName().endsWith(".jpg")) {
-			System.out.println(userFile.getFileLoc());
-			mnv.addObject("imgpath", userFile.getFileLoc());
+			String path = session.getServletContext().getRealPath("/previewPic/") + "/";
+			System.out.println(path);
+			
+			String previewFilePath = PictureUtil.previewPicGenerator(userFile, path);
+			
+			//System.out.println(previewFilePath);
+			mnv.addObject("imgpath", "/NetDisk/previewPic/" + previewFilePath);
 		}
 		
 		
 		mnv.setViewName("filePage");
-		
-		
-		
-		
-		
 		
 		return mnv;
 	}

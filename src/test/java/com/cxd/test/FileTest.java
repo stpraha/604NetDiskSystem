@@ -101,19 +101,19 @@ public class FileTest {
 //		session.commit();
 //	}
 	
-	@Test
-	public void addFileTest() {
-		mySqlSessionFactory = new MySqlSessionFactory();
-		
-		SqlSession session = mySqlSessionFactory.getSqlSession();
-		
-		UserFileMapper mapper = session.getMapper(UserFileMapper.class);
-		
-		UserFile file = new UserFile(66, "addFileTest22", 566, "1970-01-02 00:11:22", "stpraha", false, "rqwer1324rr");
-		
-		mapper.insertFile(file);	
-		session.commit();
-	}
+//	@Test
+//	public void addFileTest() {
+//		mySqlSessionFactory = new MySqlSessionFactory();
+//		
+//		SqlSession session = mySqlSessionFactory.getSqlSession();
+//		
+//		UserFileMapper mapper = session.getMapper(UserFileMapper.class);
+//		
+//		UserFile file = new UserFile(66, "addFileTest22", 566, "1970-01-02 00:11:22", "stpraha", false, "rqwer1324rr");
+//		
+//		mapper.insertFile(file);	
+//		session.commit();
+//	}
 	
 //	@Test
 //	public void selectByFilenameTest() {
@@ -128,6 +128,18 @@ public class FileTest {
 //		System.out.println(file.getFileOwner());
 //	}
 	
+//	@Test
+//	public void selectByFilenameTest() {
+//		mySqlSessionFactory = new MySqlSessionFactory();
+//		
+//		SqlSession session = mySqlSessionFactory.getSqlSession();
+//		
+//		FileMapper mapper = session.getMapper(FileMapper.class);
+//		
+//		File file = mapper.selectFileByFilename("addFileTest");
+//		
+//		System.out.println(file.getFileOwner());
+//	}
 	
 }
 
