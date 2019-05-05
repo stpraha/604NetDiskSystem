@@ -5,35 +5,35 @@ A Net Disk System based on java, mybatis, springmvc, maven
 
 Still under development
 -----------------------
-鍒扮幇鍦ㄤ负姝㈢敤鍒扮殑鎶�鏈細<br>
-<strong>鍚庣锛�</strong><br>
+Technology used now<br>
+<br>
 `spring`<br>
 `springMVC`<br>
 `maven`<br>
 `mybatis`<br>
-<strong>鍓嶇锛�</strong><br>
+<br>
 `bootstrap`<br>
 `web uploader`<br>
 `jsp`<br>
 
 Some Sample Pictures
 --------------------
-1. 涓荤晫闈㈠睍绀哄浘<br>
+1. Main page<br>
 鐢ㄤ簡bootstrap鐨勭粍浠讹紝鍒嗕负鍏叡鏂囦欢锛岀浜烘枃浠讹紝璇存槑椤碉紝涓汉涓績锛堢鐞嗘枃浠讹紝涓婁紶鏂囦欢锛岀櫥褰�/娉ㄩ攢锛�<br>
 ![pic1](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/filepageSample.png)
 
-2. 鏂囦欢涓婁紶椤甸潰灞曠ず鍥�<br>
+2. Upload page<br>
 鐢ㄤ簡web uploader鏉ヨ繘琛屾枃浠朵笂浼狅紝鏈�澶у悓鏃朵笂浼犱釜鏁颁负3锛�<strong>todo: 瀹炵幇鏂囦欢鎷嗗垎涓婁紶</strong><br>
 ![pic2](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/uploadSample.png)
 
-3. 鏂囦欢绠＄悊椤甸潰灞曠ず鍥�<br>
+3. File management page<br>
 ![pic3](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/filemanageSample.png)
 
-4. 鐧诲綍/娉ㄥ唽椤甸潰灞曠ず鍥�<br>
+4. Login/register page<br>
 ![pic4](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/loginSample.png)
 ![pic5](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/registerSample.png)
 
-4. 鐢ㄦ埛楠岃瘉鎻愮ず<br>
+5. Error<br>
 ![pic6](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/nologinSample.png)
 
 
