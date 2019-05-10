@@ -85,14 +85,27 @@ outline: 0;
 		<script>
 		var $thelist = $('#thelist');
 		var $btn = $('#ctlBtn');
+		var chunkSize = 5 * 1024 * 1024;
+		
+		
 		// 实例化
 		var uploader = WebUploader.create({
 		    pick: {
 		        id: '#picker',
 		        label: '选择文件'
 		    },
+		    formData: {
+		    	uid: 0,
+		    	md5: '',
+		    	chunkSize: chunkSize
+		    },
+		    
+		    chunked: false,
+		    chunkSize: chunkSize,
 	
 		    server: '/NetDisk/upload.do',
+		    
+		    threads: 1,
 		    
 		    //auto:true
 	
@@ -105,6 +118,9 @@ outline: 0;
 		            '<p class="state">等待上传...</p>' +
 		            '</div>');
 		});
+		
+
+		
 		
 		// 上传文件
 	    $btn.on('click', function () {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH-mm-ss} [%t] %-5level %logger{36} - %msg%n"/>
+		</Console>
+		
+		
+		<RollingFile name="ControllerRollingFile" fileName="${web:rootDir}/logs/ControllerLog.log" filePattern="${web:rootDir}/logs/ControllerLog-%d{MM-dd-yyyy}-%i.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+			<policies>
+				<TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</policies>
+			<DefaultRolloverStrategy max="20"/>
+		</RollingFile>
+		
+		<RollingFile name="ServiceRollingFile" fileName="${web:rootDir}/logs/ServiceLog.log" filePattern="${web:rootDir}/logs/SereviceLog-%d{MM-dd-yyyy}-%i.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+			<policies>
+				<TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</policies>
+			<DefaultRolloverStrategy max="20"/>
+		</RollingFile>
+
+		
+	</Appenders>
+	
+	<Loggers>
+		<Logger name="com.cxd.controller" level="trace" additivity="true">
+			<AppenderRef ref="ControllerRollingFile"/>
+		</Logger>
+		<Logger name="com.cxd.service" level="trace" additivity="true">
+			<AppenderRef ref="ServiceRollingFile"/>
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="Console"/>
+		</Root>
+	</Loggers>
+</Configuration>

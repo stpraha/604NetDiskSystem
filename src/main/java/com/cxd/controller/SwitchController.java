@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import com.cxd.utils.PictureUtil;
 
 @Controller
 public class SwitchController {
+	
+	private static final Logger logger = LogManager.getLogger(SwitchController.class);
 	
 	@Resource
 	FileService fileService;

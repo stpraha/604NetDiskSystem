@@ -3,8 +3,12 @@ package com.cxd.service;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cxd.controller.FileController;
 import com.cxd.factory.MySqlSessionFactory;
 import com.cxd.mapper.UserFileMapper;
 import com.cxd.pojo.UserFile;
@@ -16,6 +20,8 @@ import com.cxd.utils.FileUtil;
 //鏉ユ帴鏀剁敱Spring娉ㄥ叆鐨�"userService"鍗冲彲锛屽叿浣撲唬鐮佸涓嬶細
 @Service("fileService")
 public class FileService{
+	
+	private static final Logger logger = LogManager.getLogger(FileService.class);
 	
 	@Autowired
 	private MySqlSessionFactory mySqlSessionFactory;

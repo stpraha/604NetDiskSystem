@@ -29,6 +29,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpHeaders;
@@ -46,6 +48,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 @Controller
 public class FileController {
 	
+	private static final Logger logger = LogManager.getLogger(FileController.class);
+	
 	@Resource
 	FileService fileService;
 	
@@ -61,15 +65,26 @@ public class FileController {
 	@Resource
 	HttpSession session;
 	
+	
+	
+	@RequestMapping("checkFileMD5.do")
+	//@ResponseBody
+	public Object checkFileMD5(String md5) throws IOException {
+		
+		
+		
+		return md5;
+	}
+	
 	@RequestMapping("upload.do")
 	public ResponseEntity upLoad(@RequestParam("file")MultipartFile files) throws Exception {
 		
 		String user = (String) session.getAttribute("CURRENT_USER");	
-		System.out.println("Used! what to do next??>>");
+		//System.out.println("Used! what to do next??>>");
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		
 		if(isMultipart) {
-			System.out.println("start upload");
+			//System.out.println("start upload");
 			try {
 				String filename = files.getOriginalFilename();
 				int fileSize = (int) files.getSize();
@@ -86,8 +101,10 @@ public class FileController {
 				String fileLoc = "E:\\Eclipse\\UploadFiles\\" + fileStoreName;
 				
 				saveToSql(filename, fileSize, fileOwner, fileVisibility, fileLoc, fileStoreName);
+				logger.info("用户 " + fileOwner + " 上传文件  " + filename + " 成功!");
 				
 			} catch (Exception e) {
+				logger.error("用户 " + user + " 上传文件发生异常： " + e);
 				e.printStackTrace();
 			}
 			System.out.println("finish upload");
@@ -123,18 +140,22 @@ public class FileController {
 		UserFile downloadFile = fileService.selectByFileId(id);
 		
 		if(username == null || username.equals("")) {
+			logger.info("用户 " + username + " 下载文件" + downloadFile.getFileName() + "失败: 用户未登录!");
 			return "/page/login.jsp";
 		}
 		else if(downloadFile == null) {
 			System.out.println("file not found");
+			logger.info("用户 " + username + " 下载文件" + downloadFile.getFileName() + "失败: 文件不存在！");
 			return "redirect:toMain.do";
 		}
 		else if(!downloadFile.isFileVisibility() && !downloadFile.getFileOwner().equals(username)) {
 			System.out.println(downloadFile.isFileVisibility());
 			//System.out.println();
+			logger.info("用户 " + username + " 下载文件" + downloadFile.getFileName() + "失败： 权限未通过！");
 			return "redirect:toMain.do";
 		}
 		else {
+			logger.info("用户 " + username + " 下载文件" + downloadFile.getFileName() + "验证通过！");
 			return "redirect:downloadFile.do?id=" + id;
 		}
 
@@ -167,6 +188,8 @@ public class FileController {
 		HttpStatus statusCode=HttpStatus.OK;
 		 
         ResponseEntity<byte[]> response=new ResponseEntity<byte[]>(body,headers,statusCode);
+        
+        logger.info("用户 " + username + " 下载文件" + downloadFile.getFileName() + "开始下载！");
         return response;
 	}
 	
@@ -177,11 +200,15 @@ public class FileController {
 		
 		UserFile file = fileService.selectByFileId(id);
 		
-		if(file.getFileOwner().equals(session.getAttribute("CURRENT_USER"))) {
+		String username = (String) session.getAttribute("CURRENT_USER");
+		
+		if(file.getFileOwner().equals(username)) {
 			fileService.deleteFileByFileId(id);
+			logger.info("用户 " + username + " 删除文件 " + file.getFileName());
 			return "redirect:toManage.do";
 		}
 		else {
+			logger.info("用户 " + username + " 删除文件 " + file.getFileName() + " 失败：验证未通过！");
 			return "redirect:/page/login.jsp";
 		}
 	}
@@ -196,12 +223,24 @@ public class FileController {
 		
 		UserFile file = fileService.selectByFileId(id);
 		
-		if(visibility.equals("true")) {
-			fileService.changeFileVisibilityFalse(id);
+		
+		String username =  (String) session.getAttribute("CURRENT_USER");
+		
+		if(file.getFileOwner().equals(username)) {
+			if(visibility.equals("true")) {
+				fileService.changeFileVisibilityFalse(id);
+				logger.info("用户 " + username + " 将文件 " + file.getFileName() + " 设为私密");
+			}
+			else if(visibility.equals("false")) {
+				fileService.changeFileVisibilityTrue(id);
+				logger.info("用户 " + username + " 将文件 " + file.getFileName() + " 设为公开");
+			}
 		}
-		else if(visibility.equals("false")) {
-			fileService.changeFileVisibilityTrue(id);
+		else {
+			logger.info("用户 " + username + " 修改文件公开性 " + file.getFileName() + " 失败：验证未通过！");
+			return "redirect:/page/login.jsp";
 		}
+		
 		return "redirect:toManage.do";
 	}
 }

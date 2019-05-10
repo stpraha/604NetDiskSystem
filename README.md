@@ -16,14 +16,21 @@ Technology used now<br>
 `web uploader`<br>
 `jsp`<br>
 
+Some details
+------------
+Now picture files can be previewed in FilePage.<br>
+
+Logs have been added in this program (Log4j2). After start running, in Tomcat `root/NetDisk/logs`, you can find logs.<br>
+
+
+
 Some Sample Pictures
 --------------------
 1. Main page<br>
-鐢ㄤ簡bootstrap鐨勭粍浠讹紝鍒嗕负鍏叡鏂囦欢锛岀浜烘枃浠讹紝璇存槑椤碉紝涓汉涓績锛堢鐞嗘枃浠讹紝涓婁紶鏂囦欢锛岀櫥褰�/娉ㄩ攢锛�<br>
 ![pic1](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/filepageSample.png)
 
 2. Upload page<br>
-鐢ㄤ簡web uploader鏉ヨ繘琛屾枃浠朵笂浼狅紝鏈�澶у悓鏃朵笂浼犱釜鏁颁负3锛�<strong>todo: 瀹炵幇鏂囦欢鎷嗗垎涓婁紶</strong><br>
+WebUploader(Baidu) has been used in this program to upload files.<strong>todo: chunked upload</strong><br>
 ![pic2](https://github.com/stpraha/604NetDiskSystem/blob/master/SamplePics/uploadSample.png)
 
 3. File management page<br>
@@ -50,8 +57,10 @@ progress
 
 2019-05-05: add picture preview function. fix some bug. make the store path English.<br>
 
+2019-05-10: add log function.
+
 Although ModelAndView is too old, it is used here.<br>
 Model, RedirectAttributes are invalid. I don't know why.<br>
 
 
-what to do next: download file; user keep alive, user login status maintained<br>
+what to do next: chunked upload. Manager function.<br>

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,6 +20,8 @@ import com.cxd.utils.RegisterUtil;
 @Controller
 public class UserController {
 
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+	
 //	@Autowired
 //	UserService userService;
 	
@@ -44,10 +48,12 @@ public class UserController {
 		
         if(user == null || !user.getUsername().equals(username)) {
 	    	String message = "?message=loginfailed";
+	    	logger.info("登录失败： 尝试的用户名为" + username);
 			return "redirect:/page/login.jsp" + message;
         }
         else {
         	session.setAttribute("CURRENT_USER", user.getUsername());
+        	logger.info("用户 " + user.getUsername() + " 登录成功");
             return "redirect:toMain.do";
         }
     }
@@ -66,6 +72,7 @@ public class UserController {
         	System.out.println(username + "  logout");
         	session.removeAttribute("CURRENT_USER");
         	System.out.println(session.getAttribute("test  " + "CURRENT_USER"));
+        	logger.info("用户 " + username + " 注销");
             return "redirect:toMain.do";
         }
     }
@@ -83,11 +90,12 @@ public class UserController {
 		
 		if(canRegister && usernameCheck) {
 			User user = new User(1, username, password, school_id, email, admin);
-	    	System.out.println("鐐逛簡娉ㄥ唽" + username + password + confirm_password + school_id + email);
+			logger.info("用户 " + username + " 注册成功！");
 	    	userService.addUser(user);
 	    	return "redirect:login.do";
 		}
 		else {
+			logger.info("用户 " + username + " 注册失败！");
 	    	String message = "?message=registerfailed";
 			if(!userService.checkUser(username)) {
 				message = message + "&errorMessage=idUsed";
