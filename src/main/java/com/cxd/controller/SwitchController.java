@@ -126,6 +126,33 @@ public class SwitchController {
 		return mnv;
 	}
 	
+	@RequestMapping("toManagerPage.do")
+	public ModelAndView managerPage() throws Exception {
+		
+		String username = (String) session.getAttribute("CURRENT_USER");
+		
+		ModelAndView mnv = new ModelAndView();
+		
+		if(username == null || username.equals("")) {
+			mnv.setViewName("redirect:/page/login.jsp");
+		}
+		else if(!username.equals("stpraha")) {
+			mnv.setViewName("notManager");
+			return mnv;
+		}
+		else {
+			List<UserFile> fileList = fileService.selectAllFile();
+			mnv.addObject("userFile", fileList);
+			
+			List<User> userList = userService.selectAllUsers();
+			mnv.addObject("userList", userList);
+			
+			mnv.setViewName("managerPage");
+		}
+		
+		return mnv;
+	}
+	
 	@RequestMapping("toUpload.do")
 	public ModelAndView uploadFile() throws Exception {
 		

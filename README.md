@@ -22,7 +22,7 @@ Now picture files can be previewed in FilePage.<br>
 
 Logs have been added in this program (Log4j2). After start running, in Tomcat `root/NetDisk/logs`, you can find logs.<br>
 
-
+Manager function is added (not well finished).
 
 Some Sample Pictures
 --------------------
@@ -57,10 +57,12 @@ progress
 
 2019-05-05: add picture preview function. fix some bug. make the store path English.<br>
 
-2019-05-10: add log function.
+2019-05-10: add log function.<br>
+
+2019-05-13: add manager function.<br>
 
 Although ModelAndView is too old, it is used here.<br>
 Model, RedirectAttributes are invalid. I don't know why.<br>
 
 
-what to do next: chunked upload. Manager function.<br>
+what to do next: chunked upload. invite code <br>

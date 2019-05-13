@@ -1,5 +1,7 @@
 package com.cxd.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +59,13 @@ public class UserService{
 		UserMapper userMapper = session.getMapper(UserMapper.class);
 		userMapper.insertUser(user);
 		session.commit();
+	}
+	
+	public List<User> selectAllUsers() {
+		SqlSession session = mySqlSessionFactory.getSqlSession();
+		UserMapper userMapper = session.getMapper(UserMapper.class);
+		
+		return userMapper.selectAllUser();
+		
 	}
 }

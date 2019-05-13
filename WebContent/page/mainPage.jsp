@@ -97,6 +97,8 @@ outline: 0;
       <a href="/NetDisk/toManage.do"><button id="btn-manage">文件管理</button></a>
       <br>
       <a href="/NetDisk/toUpload.do"><button >文件上传</button></a>
+      <br>
+      <a href="/NetDisk/toManagerPage.do"><button >管理员</button></a>
     </div>
   </div>
 </div>

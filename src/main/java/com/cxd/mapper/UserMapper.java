@@ -14,5 +14,5 @@ public interface UserMapper {
 	
 	public void insertUser(User user);
 	
-	public List<User> selectAllUser();	
+	public List<User> selectAllUser();
 }
